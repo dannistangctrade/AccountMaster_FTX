@@ -85,7 +85,7 @@ for row in rows:
             sub_result.append(row[0])
             ##mark price
             sub_result.append(market_price)
-            ##accountMaster
+            ##accountMaster balance
             sub_result.append(row[1])
             ##ftx balance
             sub_result.append(x['total'])
@@ -115,16 +115,23 @@ for x in balance_result:
         break
 result.append(usd)
 
-df = pd.DataFrame(result, columns=['Crypto', 'Mark_Price', 'AccountMaster_Balance', 'FTX_Balance', 'Unrealised Pnl', 'Position Size','Position Hedge'])
+df = pd.DataFrame(result, columns=['Crypto',
+                                   'Mark_Price',
+                                   'AccountMaster_Balance',
+                                   'FTX_Balance',
+                                   'Unrealised Pnl',
+                                   'Position Size',
+                                   'Position Hedge'])
+
 print(df)
-##customise path to save the csv file
 now = datetime.now()
 ##customize files dir
 path = f'{now}'
 os.mkdir(path)
 df.to_csv(f'{now}/AccountMaster_FTX_Balance.csv')
 print(f'AccountMaster_FTX_Balance.csv')
-#########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+#################customers details########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
 
 
 cur.execute(f'select "CID","Currency", "Balance" from (select row_number() over (PARTITION BY "CID", "Currency" order by "DateTime" desc) as "num", * from "tbl_AccountMasters") account where "num" = 1 and "CID" not in (\'250250\', \'250251\', \'250252\',\'38AA56DF581093\', \'38B12F19EA082D\', \'38B0C6BF2650EA\', \'38B0984E7E9B72\', \'38B09714E4930A\', \'38B098A3C2F4A6\', \'3911E3C0DD7E72\', \'38AA47CD97E7B4\', \'38AA57AD9E8C2A\', \'38B0C6A5FACB5A\', \'38AA683E57733B\', \'38AA49633F80E0\', \'38B1269D203205\', \'38AB0D58CCD5E6\')  and "CID" not in (select "UserID" from "public"."tbl_Customers" where "Status" = 2) and "Currency"=\'BTC\' order by "Balance" desc')
@@ -132,7 +139,9 @@ user_btc_balance = cur.fetchall()
 user_btc_balance_list = []
 for x in user_btc_balance:
     user_btc_balance_list.append(list(x))
-user_btc_balance_list_df = pd.DataFrame(user_btc_balance_list, columns=['UserID', 'Crypto', 'Balance'])
+user_btc_balance_list_df = pd.DataFrame(user_btc_balance_list, columns=['UserID',
+                                                                        'Crypto',
+                                                                        'Balance'])
 print(user_btc_balance_list_df)
 user_btc_balance_list_df.to_csv(f'{now}/Customer_BTC_Balance.csv')
 print(f'Customer_BTC_Balance.csv')
