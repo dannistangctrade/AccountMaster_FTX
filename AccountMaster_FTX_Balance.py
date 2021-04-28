@@ -120,7 +120,7 @@ print(df)
 ##customise path to save the csv file
 now = datetime.now()
 ##customize files dir
-path = f'/Users/dannis.tang/PycharmProjects/AccountMaster_FTX/{now}'
+path = f'{now}'
 os.mkdir(path)
 df.to_csv(f'{now}/AccountMaster_FTX_Balance.csv')
 print(f'AccountMaster_FTX_Balance.csv')
@@ -137,31 +137,5 @@ print(user_btc_balance_list_df)
 user_btc_balance_list_df.to_csv(f'{now}/Customer_BTC_Balance.csv')
 print(f'Customer_BTC_Balance.csv')
 
-
-# # load markets and all coin_pairs
-# exchange.load_markets()
-# positions = exchange.fetch_positions()
-# for position in positions:
-#   if position.get('future') == 'BTC-PERP':
-#     print(position)
-#
-# # trades = exchange.fetch_my_trades
-# # print(trades)
-# openorder = exchange.fetch_open_orders()
-# print(openorder)
-#
-#
-# balance = exchange.fetch_balance()
-# print(f'balance:  {balance}')
-#
-#mark price
-# ticker = 'BTC-PERP'
-# price = exchange.fetch_ticker(ticker)
-# info = price['info']['price']
-# print(type(info))
-# positions = exchange.fetch_positions()
-# for position in positions:
-#     if position.get('future') == ftx_contract[contract]:
-#         hedge_size = float(position['size'])
 
 
