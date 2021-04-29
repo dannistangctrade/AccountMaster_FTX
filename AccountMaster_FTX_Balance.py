@@ -126,9 +126,9 @@ df = pd.DataFrame(result, columns=['Crypto',
 print(df)
 now = datetime.now()
 ##customize files dir
-path = f'{now}'
-os.mkdir(path)
-df.to_csv(f'{now}/AccountMaster_FTX_Balance.csv')
+# path = f'{str(now)[:11]}'
+# os.mkdir(path)
+csv = df.to_csv(f'AccountMaster_FTX_Balance_{str(now)[:11]}.csv')
 print(f'AccountMaster_FTX_Balance.csv')
 
 #################customers details########################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
@@ -143,7 +143,7 @@ user_btc_balance_list_df = pd.DataFrame(user_btc_balance_list, columns=['UserID'
                                                                         'Crypto',
                                                                         'Balance'])
 print(user_btc_balance_list_df)
-user_btc_balance_list_df.to_csv(f'{now}/Customer_BTC_Balance.csv')
+user_btc_balance_list_df.to_csv(f'Customer_BTC_Balance_{str(now)[:11]}.csv')
 print(f'Customer_BTC_Balance.csv')
 
 
